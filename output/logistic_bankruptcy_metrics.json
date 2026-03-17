@@ -1,0 +1,19 @@
+{
+  "train": {
+    "loss": 0.07963751333259177,
+    "accuracy": 0.9726906158357771,
+    "f1_macro": 0.6813042883403042
+  },
+  "validation": {
+    "loss": 0.11137793735102859,
+    "accuracy": 0.9684519442406456,
+    "f1_macro": 0.6890851701546378
+  },
+  "metadata": {
+    "task_name": "logistic_bankruptcy",
+    "task_type": "classification",
+    "num_classes": 2,
+    "input_dim": 95,
+    "description": "Softmax Regression applied to Taiwan bankruptcy dataset"
+  }
+}

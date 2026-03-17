@@ -1,0 +1,92 @@
+{
+    "version": "1.1.0",
+    "prompt_language": "en",
+    "interface_protocols": {
+        "pytorch_task_v1": {
+            "entrypoint": "python tasks/<task_id>/task.py",
+            "prompt_instructions": "Implement this ML task as a SINGLE self-contained Python file (task.py). Include all required functions AND a complete `if __name__ == '__main__':` block that trains the model, evaluates on a validation split, prints standard metrics (MSE, R2, parameter accuracy where applicable), and asserts quality thresholds so the script exits non-zero on failure. Do NOT create separate test files or README. The script itself is the test.",
+            "must_have_files": [
+                "tasks/<task_id>/task.py"
+            ],
+            "required_functions": [
+                "get_task_metadata",
+                "set_seed",
+                "get_device",
+                "make_dataloaders",
+                "build_model",
+                "train",
+                "evaluate",
+                "predict",
+                "save_artifacts"
+            ],
+            "evaluation_rules": [
+                "The `evaluate()` function MUST compute and return standard metrics: MSE, R2 score, and any task-specific metrics on the VALIDATION data split.",
+                "The `if __name__ == '__main__':` block MUST: (1) train the model, (2) evaluate on BOTH train and validation splits, (3) print all metrics clearly, (4) assert quality thresholds (e.g., R2 > 0.9, MSE < threshold), (5) exit 0 on success or non-zero on failure.",
+                "Do NOT use a separate test file. All evaluation logic goes in main()."
+            ],
+            "required_cfg_keys": [],
+            "standard_outputs_schema": {},
+            "docstring_rules": []
+        }
+    },
+    "tasks": [
+        {
+            "series": "Linear Regression",
+            "level": 1,
+            "id": "linear_california_housing",
+            "algorithm": "Linear Regression Adam + L2 Regularization + Autograd",
+            "description": "Implement linear regression on a dataset of California housing data. Write everything in a single task.py file with a complete main() that trains, evaluates, and validates.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "math": "Docstring must contain h_theta(x) = theta_0 + theta_1*x and the MSE cost function formula.",
+                "data": "Real: Split into 80% train / 20% validation.",
+                "implementation": "nn.optim.Adam + Autograd",
+                "evaluation": "The evaluate() function must compute MSE, R2 score, and parameter accuracy (how close theta_0 is to 3.0 and theta_1 is to 2.0) on the VALIDATION split.",
+                "main_block": "The if __name__ == '__main__' block must: train for enough epochs, print train/val MSE, R2, learned parameters vs true, and assert R2 > 0.9 on validation and parameter error < 1.0.",
+                "output": "Return dict with loss_history, val_loss_history, final metrics."
+            }
+        },
+        {
+            "series": "Logistic Regression",
+            "level": 1,
+            "id": "logistic_bankruptcy",
+            "algorithm": "Logistic Regression Adam + L2 Regularization + Cross Entropy",
+            "description": "Implement logistic regression on a dataset of Taiwanese business bankruptcy data. Write everything in a single task.py file with a complete main() that trains, evaluates, and validates.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Real: Split into 80% train / 20% validation.",
+                "implementation": "nn.optim.Adam + Autograd + nn.CrossEntropy",
+                "main_block": "The if __name__ == '__main__' block must: train for enough epochs, print train/val MSE, R2, learned parameters vs true, and assert R2 > 0.9 on validation and parameter error < 1.0.",
+                "output": "Return dict with loss_history, val_loss_history, final metrics."
+            }
+        },
+        {
+            "series": "Logistic Regression",
+            "level": 1,
+            "id": "logistic_fashion_mnist",
+            "algorithm": "Linear Regression Adam + L2 Regularization + Autograd",
+            "description": "Implement logistic regression on a dataset of greyscale fashion images. Write everything in a single task.py file with a complete main() that trains, evaluates, and validates.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Real: Split into 80% train / 20% validation.",
+                "implementation": "nn.optim.Adam + Autograd + nn.CrossEntropy",
+                "main_block": "The if __name__ == '__main__' block must: train for enough epochs, print train/val MSE, R2, learned parameters vs true, and assert R2 > 0.9 on validation and parameter error < 1.0.",
+                "output": "Return dict with loss_history, val_loss_history, final metrics."
+            }
+        },
+        {
+            "series": "Logistic Regression",
+            "level": 1,
+            "id": "logistic_iris",
+            "algorithm": "Linear Regression Adam + L2 Regularization + Autograd",
+            "description": "Implement logistic regression on a dataset of iris data. Write everything in a single task.py file with a complete main() that trains, evaluates, and validates.",
+            "interface_protocol": "pytorch_task_v1",
+            "requirements": {
+                "data": "Real: Split into 80% train / 20% validation.",
+                "implementation": "nn.optim.Adam + Autograd + nn.CrossEntropy",
+                "main_block": "The if __name__ == '__main__' block must: train for enough epochs, print train/val MSE, R2, learned parameters vs true, and assert R2 > 0.9 on validation and parameter error < 1.0.",
+                "output": "Return dict with loss_history, val_loss_history, final metrics."
+            }
+        }
+    ]
+}

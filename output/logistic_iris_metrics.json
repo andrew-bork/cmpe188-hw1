@@ -1,0 +1,19 @@
+{
+  "train": {
+    "loss": 0.3612477630376816,
+    "accuracy": 0.8833333333333333,
+    "f1_macro": 0.8829090985354626
+  },
+  "validation": {
+    "loss": 0.3226505517959595,
+    "accuracy": 0.9666666666666667,
+    "f1_macro": 0.9658994032395567
+  },
+  "metadata": {
+    "task_name": "logistic_iris",
+    "task_type": "classification",
+    "num_classes": 3,
+    "input_dim": 3,
+    "description": "Softmax regression for the IRIS dataset. 3 classes"
+  }
+}
